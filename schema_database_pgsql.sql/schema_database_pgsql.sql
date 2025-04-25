@@ -238,275 +238,46 @@ ALTER SEQUENCE public.tbl_tipos_contato_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.tbl_tipos_contato_id_seq OWNED BY public.tbl_tipos_contato.id;
 
-
---
--- Name: tbl_cliente_contatos id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_cliente_contatos ALTER COLUMN id SET DEFAULT nextval('public.tbl_cliente_contatos_id_seq'::regclass);
-
-
---
--- Name: tbl_cliente_contratos id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_cliente_contratos ALTER COLUMN id SET DEFAULT nextval('public.tbl_cliente_contratos_id_seq'::regclass);
-
-
---
--- Name: tbl_clientes id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_clientes ALTER COLUMN id SET DEFAULT nextval('public.tbl_clientes_id_seq'::regclass);
-
-
---
--- Name: tbl_planos id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_planos ALTER COLUMN id SET DEFAULT nextval('public.tbl_planos_id_seq'::regclass);
-
-
---
--- Name: tbl_status_contrato id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_status_contrato ALTER COLUMN id SET DEFAULT nextval('public.tbl_status_contrato_id_seq'::regclass);
-
-
---
--- Name: tbl_tipos_contato id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_tipos_contato ALTER COLUMN id SET DEFAULT nextval('public.tbl_tipos_contato_id_seq'::regclass);
-
-
---
--- Data for Name: tbl_cliente_contatos; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- Data for tbl_cliente_contatos
 COPY public.tbl_cliente_contatos (id, cliente_id, tipo_contato_id, contato) FROM stdin;
-\.
 
-
---
--- Data for Name: tbl_cliente_contratos; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- Data for tbl_cliente_contratos
 COPY public.tbl_cliente_contratos (id, cliente_id, plano_id, dia_vencimento, isento, endereco_logradouro, endereco_numero, endereco_bairro, endereco_cidade, endereco_complemento, endereco_cep, endereco_uf, status_id) FROM stdin;
-\.
 
-
---
--- Data for Name: tbl_clientes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- Data for tbl_clientes
 COPY public.tbl_clientes (id, nome_razao_social, nome_fantasia, cpf_cnpj, data_nascimento, data_cadastro) FROM stdin;
-\.
 
-
---
--- Data for Name: tbl_planos; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- Data for tbl_planos
 COPY public.tbl_planos (id, descricao, valor) FROM stdin;
-\.
 
-
---
--- Data for Name: tbl_status_contrato; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- Data for tbl_status_contrato
 COPY public.tbl_status_contrato (id, status) FROM stdin;
-1	Ativo
-2	Velocidade Reduzida
-3	Suspenso
-4	Cancelado
-\.
 
-
---
--- Data for Name: tbl_tipos_contato; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+-- Data for tbl_tipos_contato
 COPY public.tbl_tipos_contato (id, tipo_contato) FROM stdin;
-1	Telefone
-2	Celular
-3	E-Mail
-\.
 
-
---
--- Name: tbl_cliente_contatos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
+-- Define sequences to be reset
 SELECT pg_catalog.setval('public.tbl_cliente_contatos_id_seq', 1, false);
-
-
---
--- Name: tbl_cliente_contratos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
 SELECT pg_catalog.setval('public.tbl_cliente_contratos_id_seq', 1, false);
-
-
---
--- Name: tbl_clientes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
 SELECT pg_catalog.setval('public.tbl_clientes_id_seq', 1, false);
-
-
---
--- Name: tbl_planos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
 SELECT pg_catalog.setval('public.tbl_planos_id_seq', 1, false);
-
-
---
--- Name: tbl_status_contrato_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
 SELECT pg_catalog.setval('public.tbl_status_contrato_id_seq', 4, true);
-
-
---
--- Name: tbl_tipos_contato_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
 SELECT pg_catalog.setval('public.tbl_tipos_contato_id_seq', 3, true);
 
-
---
--- Name: tbl_cliente_contatos tbl_cliente_contatos_cliente_id_tipo_contato_id_contato_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
+-- Define constraints
 ALTER TABLE ONLY public.tbl_cliente_contatos
     ADD CONSTRAINT tbl_cliente_contatos_cliente_id_tipo_contato_id_contato_key UNIQUE (cliente_id, tipo_contato_id, contato);
-
-
---
--- Name: tbl_cliente_contatos tbl_cliente_contatos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.tbl_cliente_contatos
     ADD CONSTRAINT tbl_cliente_contatos_pkey PRIMARY KEY (id);
-
-
---
--- Name: tbl_cliente_contratos tbl_cliente_contratos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.tbl_cliente_contratos
     ADD CONSTRAINT tbl_cliente_contratos_pkey PRIMARY KEY (id);
-
-
---
--- Name: tbl_clientes tbl_clientes_cpf_cnpj_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.tbl_clientes
     ADD CONSTRAINT tbl_clientes_cpf_cnpj_key UNIQUE (cpf_cnpj);
-
-
---
--- Name: tbl_clientes tbl_clientes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.tbl_clientes
     ADD CONSTRAINT tbl_clientes_pkey PRIMARY KEY (id);
-
-
---
--- Name: tbl_planos tbl_planos_descricao_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_planos
-    ADD CONSTRAINT tbl_planos_descricao_key UNIQUE (descricao);
-
-
---
--- Name: tbl_planos tbl_planos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.tbl_planos
     ADD CONSTRAINT tbl_planos_pkey PRIMARY KEY (id);
-
-
---
--- Name: tbl_status_contrato tbl_status_contrato_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.tbl_status_contrato
     ADD CONSTRAINT tbl_status_contrato_pkey PRIMARY KEY (id);
-
-
---
--- Name: tbl_status_contrato tbl_status_contrato_status_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_status_contrato
-    ADD CONSTRAINT tbl_status_contrato_status_key UNIQUE (status);
-
-
---
--- Name: tbl_tipos_contato tbl_tipos_contato_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
 ALTER TABLE ONLY public.tbl_tipos_contato
     ADD CONSTRAINT tbl_tipos_contato_pkey PRIMARY KEY (id);
-
-
---
--- Name: tbl_tipos_contato tbl_tipos_contato_tipo_contato_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_tipos_contato
-    ADD CONSTRAINT tbl_tipos_contato_tipo_contato_key UNIQUE (tipo_contato);
-
-
---
--- Name: tbl_cliente_contatos tbl_cliente_contatos_cliente_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_cliente_contatos
-    ADD CONSTRAINT tbl_cliente_contatos_cliente_id_fkey FOREIGN KEY (cliente_id) REFERENCES public.tbl_clientes(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: tbl_cliente_contatos tbl_cliente_contatos_tipo_contato_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_cliente_contatos
-    ADD CONSTRAINT tbl_cliente_contatos_tipo_contato_id_fkey FOREIGN KEY (tipo_contato_id) REFERENCES public.tbl_tipos_contato(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: tbl_cliente_contratos tbl_cliente_contratos_cliente_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_cliente_contratos
-    ADD CONSTRAINT tbl_cliente_contratos_cliente_id_fkey FOREIGN KEY (cliente_id) REFERENCES public.tbl_clientes(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: tbl_cliente_contratos tbl_cliente_contratos_plano_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_cliente_contratos
-    ADD CONSTRAINT tbl_cliente_contratos_plano_id_fkey FOREIGN KEY (plano_id) REFERENCES public.tbl_planos(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: tbl_cliente_contratos tbl_cliente_contratos_status_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.tbl_cliente_contratos
-    ADD CONSTRAINT tbl_cliente_contratos_status_id_fkey FOREIGN KEY (status_id) REFERENCES public.tbl_status_contrato(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- PostgreSQL database dump complete
---
-

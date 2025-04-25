@@ -39,3 +39,10 @@ Este projeto importa dados de clientes a partir de uma planilha `.xlsx` para um 
 Ao final, o script informa:
 - Total de registros importados
 - Erros encontrados com número da linha e motivo
+
+
+
+#Obs:
+
+O script foi alterado schema_database_pgsql por um erro de sintaxe (\. — por isso dá erro de sintaxe)
+estrutura é a mesma
